@@ -1,26 +1,20 @@
 .navbar {
-    background-color: #333;
-    color: white;
-    padding: 10px;
+    min-height: 72px;
+    padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: rgba(8, 17, 32, 0.78);
+    color: white;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    backdrop-filter: blur(18px);
   }
   
   .navbar-logo {
-    color: white;
+    margin: 0;
+    color: #f8fafc;
     font-size: 24px;
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navbar-links li {
-    cursor: pointer;
+    font-weight: 800;
+    letter-spacing: 0.02em;
   }
   

@@ -1,19 +1,12 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import Stories from "./Stories";
-import Feed from "./Feed";
-import Messages from "./Messages";
-import Activities from "./Activities";
 import { jwtDecode } from 'jwt-decode';
 import { Link } from "react-router-dom";
-import { getPosts } from "../services/api";
 import { getFriendPosts } from "../services/api";
 import Post from "./Post";
 import Comment from './Comment';
 import LikeButton from './LikeButton';
-import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import "./Feed.css";
 
@@ -33,13 +26,11 @@ const getUserIdFromToken = () => {
 function Home(){
   const userId = getUserIdFromToken();
   const [posts, setPosts] = useState([]);
-  console.log(posts);
+
   const fetchPosts = async () => {
     try{
-      console.log(userId);
-        const data = await getFriendPosts(userId);
-        //console.log(data);
-        setPosts(data);
+      const data = await getFriendPosts(userId);
+      setPosts(data);
     }
     catch(error){
         console.log(error.message);
@@ -53,35 +44,67 @@ function Home(){
   }, []);
 
     return(
-      <div className="home">
-        <div className="navbar">
-            <Navbar/>
+      <div className="home-shell">
+        <Navbar/>
+
+        <div className="dashboard-hero">
+          <div>
+            <p className="eyebrow">Your feed</p>
+            <h1>See what your friends are sharing.</h1>
+            <p className="hero-copy">A cleaner dashboard for posts, likes, comments, and conversations.</p>
+          </div>
+          <div className="hero-metrics">
+            <div className="metric-card">
+              <span>Posts</span>
+              <strong>{posts.length}</strong>
+            </div>
+            <div className="metric-card">
+              <span>Status</span>
+              <strong>Active</strong>
+            </div>
+          </div>
         </div>
-              <div className="fullpage">
-                <div className="side">
-                  <Sidebar/>
-                </div>
-                <div className="post">
-                  <div className="newpost">
-                    <Link to="/post2">
-                      <button>Create a new post</button>
-                    </Link>
+
+        <div className="fullpage">
+          <aside className="side sidebar-panel">
+            <Sidebar/>
+          </aside>
+
+          <main className="post feed-panel">
+            <div className="feed-topbar">
+              <div>
+                <p className="eyebrow">Feed</p>
+                <h2>Latest posts</h2>
+              </div>
+              <Link to="/post2" className="create-post-button">
+                Create a new post
+              </Link>
+            </div>
+
+            <div className="feed-list">
+              {posts.length === 0 && <div className="empty-state">No posts yet. Start the conversation.</div>}
+              {posts.map(post => (
+                <div className="main-post-content" key={post.id}>
+                  <Post post={post} userId={userId} onDelete={handleDelete}/>
+                  <div className="post-actions">
+                    <LikeButton postId={post.id} />
+                    <Comment postId={post.id}  />
                   </div>
-                  {posts.map(post => (
-                    <div className="main-post-content">
-                    <Post key={post.id} post={post} userId={userId} onDelete={handleDelete}/>
-                    <div className="post-actions">
-                      <LikeButton postId={post.id} />
-                      <Comment postId={post.id}  />
-                    </div>
-                    </div>
-                  ))}
                 </div>
-              </div>
-                  
-              <div className="activities">
-               
-              </div>
+              ))}
+            </div>
+          </main>
+
+          <aside className="activities sidebar-panel">
+            <p className="eyebrow">Activity</p>
+            <h2>Quick tips</h2>
+            <ul className="activity-list">
+              <li>Create a post to appear in your friends' feed.</li>
+              <li>Use the Friends page to accept requests and chat.</li>
+              <li>Update your profile image from the profile page.</li>
+            </ul>
+          </aside>
+        </div>
       </div>
     );
 }

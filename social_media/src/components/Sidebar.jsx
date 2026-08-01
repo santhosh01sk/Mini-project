@@ -16,12 +16,12 @@ const Sidebar = () => {
         navigate("/profile");
       }
     return (
-        <div >
-            <div >
-                
-                <div onClick={handleHome} className="p-2 hover:bg-gray-200 rounded">Home</div>
-                <div onClick={handleProfile} className="p-2 hover:bg-gray-200 rounded">Profile</div>
-                <div onClick={handleFriend} className="p-2 hover:bg-gray-200 rounded">Friends</div>
+        <div className="sidebar-nav">
+            <button onClick={handleHome} className="sidebar-link">Home</button>
+            <button onClick={handleProfile} className="sidebar-link">Profile</button>
+            <button onClick={handleFriend} className="sidebar-link">Friends</button>
+            <div className="sidebar-note">
+              Connect, post, and chat from one place.
             </div>
         </div>
     );

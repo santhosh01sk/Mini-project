@@ -21,7 +21,22 @@ const findUserByEmail = async (email) => {
   }
 };
 
+const findUserByUsername = async (username) => {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM users WHERE username = $1',
+      [username]
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error('Error finding user by username:', error);
+    throw error;
+  }
+};
+
 
 module.exports = {
-  createUser, findUserByEmail
+  createUser,
+  findUserByEmail,
+  findUserByUsername
 };

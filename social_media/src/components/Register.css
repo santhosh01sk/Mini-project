@@ -1,17 +1,7 @@
-.register-container{
-    background-image: url("../images/register.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    position: relative;
+.auth-screen-register .auth-brand h1 {
+  max-width: 10ch;
 }
-.register-box {
-    width: 300px; 
-    height: auto;
-    max-width: 100%;
-    backdrop-filter: blur(30px); 
-  }
+
+.auth-screen-register .auth-card {
+  background: rgba(7, 14, 27, 0.76);
+}

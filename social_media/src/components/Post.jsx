@@ -3,6 +3,9 @@ import './Post.css';
 import { deletePost } from '../services/api';
 
 function Post({ userId,post, onDelete }) {
+  const fallbackAvatar = '/default-avatar.svg';
+  const profileImage = post.profile_img ? `http://localhost:5000/uploads/${post.profile_img}` : fallbackAvatar;
+
   //console.log(post.id);
   const handleDelete = async () => {
     try {
@@ -16,7 +19,14 @@ function Post({ userId,post, onDelete }) {
   return (
     <div className="post">
       <div className="post-header">
-        <img src={`http://localhost:5000/uploads/${post.profile_img}`} alt="Profile" className="profile-img" />
+        <img
+          src={profileImage}
+          onError={(event) => {
+            event.currentTarget.src = fallbackAvatar;
+          }}
+          alt="Profile"
+          className="profile-img"
+        />
         <div className="user-info">
           <h3>{post.username}</h3>
         </div>

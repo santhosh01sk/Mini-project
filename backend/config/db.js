@@ -4,8 +4,8 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'social_media',
-  password: 'Admin123',
-  port: 1710,
+  password: 'SunRise@2006',
+  port: 5432,
 });
 pool.connect()
   .then(() => console.log('Database connected using pg Pool...'))
