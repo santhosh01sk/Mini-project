@@ -1,0 +1,348 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="100%" height="100%" style="background-color: #0b1120; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Background Glows -->
+    <radialGradient id="bgGlow1" cx="20%" cy="15%" r="50%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0b1120" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="bgGlow2" cx="80%" cy="85%" r="60%">
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0b1120" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="accentGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0b1120" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Header Gradients -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <linearGradient id="storageGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#4ade80"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#c084fc"/>
+    </marker>
+  </defs>
+
+  <!-- Background Rectangles -->
+  <rect width="100%" height="100%" fill="#0b1120"/>
+  <rect width="100%" height="100%" fill="url(#bgGlow1)"/>
+  <rect width="100%" height="100%" fill="url(#bgGlow2)"/>
+  <circle cx="800" cy="500" r="500" fill="url(#accentGlow)"/>
+
+  <!-- ================= TOP HEADER ================= -->
+  <g transform="translate(60, 45)">
+    <rect x="0" y="0" width="40" height="40" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="20" y="26" text-anchor="middle" font-size="20" fill="#38bdf8" font-weight="bold">M</text>
+    <text x="55" y="24" font-size="24" font-weight="800" fill="url(#titleGrad)" letter-spacing="0.5">Mini Social — Full-Stack System Architecture</text>
+    <text x="55" y="42" font-size="13" fill="#94a3b8">Multi-Tier Architecture Diagram (React 18 SPA • Express &amp; Node.js • PostgreSQL 16 • Local Media Storage)</text>
+  </g>
+
+  <!-- ================= TIER 1: CLIENT (PRESENTATION LAYER) ================= -->
+  <g transform="translate(60, 110)">
+    <!-- Container -->
+    <rect width="1480" height="230" rx="16" fill="#0f172a" fill-opacity="0.85" stroke="#1e293b" stroke-width="1.5"/>
+    
+    <!-- Tier Header -->
+    <rect x="0" y="0" width="1480" height="42" rx="16" fill="url(#clientGrad)" fill-opacity="0.15"/>
+    <path d="M 0 16 Q 0 0 16 0 L 1464 0 Q 1480 0 1480 16 L 1480 42 L 0 42 Z" fill="#0284c7" fill-opacity="0.25"/>
+    <text x="24" y="27" font-size="15" font-weight="700" fill="#38bdf8" letter-spacing="0.5">PRESENTATION TIER — Single Page Application (SPA)</text>
+    <rect x="520" y="11" width="130" height="22" rx="6" fill="#0369a1" fill-opacity="0.4" stroke="#38bdf8" stroke-width="1"/>
+    <text x="585" y="26" font-size="11" font-weight="600" fill="#7dd3fc" text-anchor="middle">Port 3000 • React 18</text>
+
+    <!-- Component Cards -->
+    <!-- 1. Auth Module -->
+    <g transform="translate(24, 60)">
+      <rect width="220" height="150" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="220" height="32" rx="10" fill="#2563eb" fill-opacity="0.2"/>
+      <text x="14" y="21" font-size="13" font-weight="700" fill="#93c5fd">🔐 Authentication</text>
+      <text x="14" y="55" font-size="11" fill="#cbd5e1">• Register.jsx (Sign Up)</text>
+      <text x="14" y="77" font-size="11" fill="#cbd5e1">• Login.jsx (User Login)</text>
+      <text x="14" y="99" font-size="11" fill="#cbd5e1">• Admin Login Screen</text>
+      <text x="14" y="121" font-size="11" fill="#cbd5e1">• PublicOnlyRoute Guard</text>
+      <text x="14" y="138" font-size="10" fill="#64748b">JWT Stored in localStorage</text>
+    </g>
+
+    <!-- 2. Home & Feed -->
+    <g transform="translate(268, 60)">
+      <rect width="220" height="150" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="220" height="32" rx="10" fill="#0d9488" fill-opacity="0.2"/>
+      <text x="14" y="21" font-size="13" font-weight="700" fill="#5eead4">📰 Feed &amp; Interactions</text>
+      <text x="14" y="55" font-size="11" fill="#cbd5e1">• Home.jsx (Main Layout)</text>
+      <text x="14" y="77" font-size="11" fill="#cbd5e1">• Feed.jsx (Post Stream)</text>
+      <text x="14" y="99" font-size="11" fill="#cbd5e1">• Post2.jsx (Create Post)</text>
+      <text x="14" y="121" font-size="11" fill="#cbd5e1">• LikeButton.jsx (Toggle)</text>
+      <text x="14" y="138" font-size="10" fill="#64748b">Comment.jsx &amp; Real-time count</text>
+    </g>
+
+    <!-- 3. Friends & Social Graph -->
+    <g transform="translate(512, 60)">
+      <rect width="220" height="150" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="220" height="32" rx="10" fill="#6366f1" fill-opacity="0.2"/>
+      <text x="14" y="21" font-size="13" font-weight="700" fill="#a5b4fc">👥 Social Connections</text>
+      <text x="14" y="55" font-size="11" fill="#cbd5e1">• Friend.jsx (Social Hub)</text>
+      <text x="14" y="77" font-size="11" fill="#cbd5e1">• Discover Users Grid</text>
+      <text x="14" y="99" font-size="11" fill="#cbd5e1">• Send Friend Request</text>
+      <text x="14" y="121" font-size="11" fill="#cbd5e1">• Pending Requests Tray</text>
+      <text x="14" y="138" font-size="10" fill="#64748b">Accept / Reject Friendship</text>
+    </g>
+
+    <!-- 4. Messaging & Chat -->
+    <g transform="translate(756, 60)">
+      <rect width="220" height="150" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="220" height="32" rx="10" fill="#0284c7" fill-opacity="0.2"/>
+      <text x="14" y="21" font-size="13" font-weight="700" fill="#7dd3fc">💬 Direct Messages</text>
+      <text x="14" y="55" font-size="11" fill="#cbd5e1">• Chat.jsx (Active Session)</text>
+      <text x="14" y="77" font-size="11" fill="#cbd5e1">• Messages.jsx (Thread UI)</text>
+      <text x="14" y="99" font-size="11" fill="#cbd5e1">• 1-on-1 Friend Chat</text>
+      <text x="14" y="121" font-size="11" fill="#cbd5e1">• Timestamped Messages</text>
+      <text x="14" y="138" font-size="10" fill="#64748b">Auto-scroll thread history</text>
+    </g>
+
+    <!-- 5. Profile Hub -->
+    <g transform="translate(1000, 60)">
+      <rect width="220" height="150" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="220" height="32" rx="10" fill="#a855f7" fill-opacity="0.2"/>
+      <text x="14" y="21" font-size="13" font-weight="700" fill="#d8b4fe">👤 Profile Hub</text>
+      <text x="14" y="55" font-size="11" fill="#cbd5e1">• Profile.jsx (User Card)</text>
+      <text x="14" y="77" font-size="11" fill="#cbd5e1">• Avatar Photo Upload</text>
+      <text x="14" y="99" font-size="11" fill="#cbd5e1">• Bio &amp; Username Edit</text>
+      <text x="14" y="121" font-size="11" fill="#cbd5e1">• User's Own Posts Grid</text>
+      <text x="14" y="138" font-size="10" fill="#64748b">Post Delete action</text>
+    </g>
+
+    <!-- 6. Admin Dashboard -->
+    <g transform="translate(1244, 60)">
+      <rect width="212" height="150" rx="10" fill="#1e293b" stroke="#dc2626" stroke-width="1"/>
+      <rect width="212" height="32" rx="10" fill="#dc2626" fill-opacity="0.2"/>
+      <text x="14" y="21" font-size="13" font-weight="700" fill="#fca5a5">⚡ Admin Console</text>
+      <text x="14" y="55" font-size="11" fill="#cbd5e1">• Admin.jsx (Metrics)</text>
+      <text x="14" y="77" font-size="11" fill="#cbd5e1">• System Activity Logs</text>
+      <text x="14" y="99" font-size="11" fill="#cbd5e1">• Live SQL Query Runner</text>
+      <text x="14" y="121" font-size="11" fill="#cbd5e1">• User &amp; Post Analytics</text>
+      <text x="14" y="138" font-size="10" fill="#64748b">Full Schema Control</text>
+    </g>
+  </g>
+
+  <!-- ================= TIER 2: APPLICATION & API LAYER (MIDDLE TIER) ================= -->
+  <g transform="translate(60, 400)">
+    <!-- Container -->
+    <rect width="1480" height="240" rx="16" fill="#0f172a" fill-opacity="0.85" stroke="#1e293b" stroke-width="1.5"/>
+    
+    <!-- Tier Header -->
+    <path d="M 0 16 Q 0 0 16 0 L 1464 0 Q 1480 0 1480 16 L 1480 42 L 0 42 Z" fill="#16a34a" fill-opacity="0.25"/>
+    <text x="24" y="27" font-size="15" font-weight="700" fill="#4ade80" letter-spacing="0.5">APPLICATION TIER — Express &amp; Node.js REST API Server</text>
+    <rect x="575" y="11" width="165" height="22" rx="6" fill="#14532d" fill-opacity="0.5" stroke="#4ade80" stroke-width="1"/>
+    <text x="657" y="26" font-size="11" font-weight="600" fill="#86efac" text-anchor="middle">Port 5000 • CORS Enabled</text>
+
+    <!-- Sub-containers -->
+    <!-- 1. Middleware Box -->
+    <g transform="translate(24, 60)">
+      <rect width="260" height="160" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="260" height="30" rx="10" fill="#059669" fill-opacity="0.2"/>
+      <text x="14" y="20" font-size="12" font-weight="700" fill="#6ee7b7">⚙️ Server Middlewares</text>
+      <text x="14" y="52" font-size="11" fill="#cbd5e1"><tspan fill="#38bdf8">cors()</tspan> : Origin: localhost:3000</text>
+      <text x="14" y="74" font-size="11" fill="#cbd5e1"><tspan fill="#38bdf8">express.json()</tspan> : Body parsing</text>
+      <text x="14" y="96" font-size="11" fill="#cbd5e1"><tspan fill="#38bdf8">express.static()</tspan> : /uploads route</text>
+      <text x="14" y="118" font-size="11" fill="#cbd5e1"><tspan fill="#38bdf8">multer.diskStorage</tspan> : Media saves</text>
+      <text x="14" y="140" font-size="11" fill="#cbd5e1"><tspan fill="#38bdf8">bcrypt</tspan> : 10 salt rounds hashing</text>
+    </g>
+
+    <!-- 2. Routes & Controllers Box -->
+    <g transform="translate(308, 60)">
+      <rect width="570" height="160" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="570" height="30" rx="10" fill="#2563eb" fill-opacity="0.2"/>
+      <text x="14" y="20" font-size="12" font-weight="700" fill="#93c5fd">📡 API Routes &amp; Business Logic Controllers</text>
+      
+      <!-- Columns inside Routes -->
+      <g transform="translate(14, 45)">
+        <text x="0" y="10" font-size="11" font-weight="600" fill="#38bdf8">/api/auth</text>
+        <text x="100" y="10" font-size="11" fill="#94a3b8">→ registerUser, loginUser, loginAdmin</text>
+
+        <text x="0" y="32" font-size="11" font-weight="600" fill="#38bdf8">/api/posts</text>
+        <text x="100" y="32" font-size="11" fill="#94a3b8">→ formPost (Multer), getPosts, deletePost</text>
+
+        <text x="0" y="54" font-size="11" font-weight="600" fill="#38bdf8">/api/friends</text>
+        <text x="100" y="54" font-size="11" fill="#94a3b8">→ sendFriendRequest, accept/reject, discover</text>
+
+        <text x="0" y="76" font-size="11" font-weight="600" fill="#38bdf8">/api/messages</text>
+        <text x="100" y="76" font-size="11" fill="#94a3b8">→ getMessages, sendMessage</text>
+
+        <text x="0" y="98" font-size="11" font-weight="600" fill="#38bdf8">/api/likes, comments</text>
+        <text x="135" y="98" font-size="11" fill="#94a3b8">→ toggleLike, count, addComment, fetch</text>
+      </g>
+    </g>
+
+    <!-- 3. Security & DAL Box -->
+    <g transform="translate(902, 60)">
+      <rect width="554" height="160" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="554" height="30" rx="10" fill="#7c3aed" fill-opacity="0.2"/>
+      <text x="14" y="20" font-size="12" font-weight="700" fill="#c4b5fd">🛡️ Security &amp; Data Access Layer (DAL)</text>
+
+      <g transform="translate(14, 45)">
+        <text x="0" y="10" font-size="11" fill="#cbd5e1"><tspan font-weight="700" fill="#f43f5e">JWT Token Auth:</tspan> Issues HS256 signed bearer tokens with 1h/2h TTL</text>
+        <text x="0" y="34" font-size="11" fill="#cbd5e1"><tspan font-weight="700" fill="#38bdf8">Parameterized SQL:</tspan> Protection against SQL Injection using $1, $2 bindings</text>
+        <text x="0" y="58" font-size="11" fill="#cbd5e1"><tspan font-weight="700" fill="#4ade80">Models Structure:</tspan> models/user.js, posts.js, friend.js, messages.js, comments.js</text>
+        <text x="0" y="82" font-size="11" fill="#cbd5e1"><tspan font-weight="700" fill="#f59e0b">Connection Pool:</tspan> pg.Pool manages reusable client connections to PostgreSQL</text>
+        <text x="0" y="104" font-size="10" fill="#64748b">Centralized Error Handling &amp; async/await controller pattern</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= TIER 3: DATA & STORAGE TIER ================= -->
+  <g transform="translate(60, 700)">
+    <!-- Container -->
+    <rect width="1480" height="240" rx="16" fill="#0f172a" fill-opacity="0.85" stroke="#1e293b" stroke-width="1.5"/>
+    
+    <!-- Tier Header -->
+    <path d="M 0 16 Q 0 0 16 0 L 1464 0 Q 1480 0 1480 16 L 1480 42 L 0 42 Z" fill="#2563eb" fill-opacity="0.25"/>
+    <text x="24" y="27" font-size="15" font-weight="700" fill="#60a5fa" letter-spacing="0.5">DATA &amp; PERSISTENCE TIER — Relational Database &amp; Media Storage</text>
+    <rect x="670" y="11" width="165" height="22" rx="6" fill="#1e3a8a" fill-opacity="0.5" stroke="#60a5fa" stroke-width="1"/>
+    <text x="752" y="26" font-size="11" font-weight="600" fill="#93c5fd" text-anchor="middle">Port 5432 • PostgreSQL 16</text>
+
+    <!-- Sub-containers -->
+    <!-- 1. Database Tables Grid -->
+    <g transform="translate(24, 60)">
+      <rect width="1070" height="160" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <rect width="1070" height="30" rx="10" fill="#1d4ed8" fill-opacity="0.2"/>
+      <text x="14" y="20" font-size="12" font-weight="700" fill="#93c5fd">🗄️ Relational Database Schema (social_media)</text>
+
+      <!-- Table Badges -->
+      <!-- users -->
+      <g transform="translate(14, 45)">
+        <rect width="160" height="98" rx="8" fill="#0f172a" stroke="#2563eb" stroke-width="1"/>
+        <text x="10" y="20" font-size="12" font-weight="bold" fill="#60a5fa">users</text>
+        <text x="10" y="38" font-size="10" fill="#94a3b8">🔑 user_id (PK)</text>
+        <text x="10" y="54" font-size="10" fill="#94a3b8">email, password</text>
+        <text x="10" y="70" font-size="10" fill="#94a3b8">username, profile_img</text>
+        <text x="10" y="86" font-size="10" fill="#64748b">created_at</text>
+      </g>
+
+      <!-- posts -->
+      <g transform="translate(190, 45)">
+        <rect width="160" height="98" rx="8" fill="#0f172a" stroke="#0d9488" stroke-width="1"/>
+        <text x="10" y="20" font-size="12" font-weight="bold" fill="#2dd4bf">posts</text>
+        <text x="10" y="38" font-size="10" fill="#94a3b8">🔑 id (PK)</text>
+        <text x="10" y="54" font-size="10" fill="#94a3b8">🔗 user_id (FK)</text>
+        <text x="10" y="70" font-size="10" fill="#94a3b8">caption, image_url</text>
+        <text x="10" y="86" font-size="10" fill="#64748b">CASCADE on delete</text>
+      </g>
+
+      <!-- comments -->
+      <g transform="translate(366, 45)">
+        <rect width="160" height="98" rx="8" fill="#0f172a" stroke="#7c3aed" stroke-width="1"/>
+        <text x="10" y="20" font-size="12" font-weight="bold" fill="#c084fc">comments</text>
+        <text x="10" y="38" font-size="10" fill="#94a3b8">🔑 id (PK)</text>
+        <text x="10" y="54" font-size="10" fill="#94a3b8">🔗 user_id, post_id (FK)</text>
+        <text x="10" y="70" font-size="10" fill="#94a3b8">comment_text</text>
+        <text x="10" y="86" font-size="10" fill="#64748b">created_at</text>
+      </g>
+
+      <!-- likes -->
+      <g transform="translate(542, 45)">
+        <rect width="160" height="98" rx="8" fill="#0f172a" stroke="#e11d48" stroke-width="1"/>
+        <text x="10" y="20" font-size="12" font-weight="bold" fill="#fb7185">likes</text>
+        <text x="10" y="38" font-size="10" fill="#94a3b8">🔑 id (PK)</text>
+        <text x="10" y="54" font-size="10" fill="#94a3b8">🔗 user_id, post_id (FK)</text>
+        <text x="10" y="70" font-size="10" fill="#94a3b8">UNIQUE(user, post)</text>
+        <text x="10" y="86" font-size="10" fill="#64748b">created_at</text>
+      </g>
+
+      <!-- friend_requests & friends -->
+      <g transform="translate(718, 45)">
+        <rect width="160" height="98" rx="8" fill="#0f172a" stroke="#4f46e5" stroke-width="1"/>
+        <text x="10" y="20" font-size="12" font-weight="bold" fill="#818cf8">friends &amp; reqs</text>
+        <text x="10" y="38" font-size="10" fill="#94a3b8">🔗 sender_id, receiver_id</text>
+        <text x="10" y="54" font-size="10" fill="#94a3b8">status: pending/accepted</text>
+        <text x="10" y="70" font-size="10" fill="#94a3b8">friends: (user_id, friend_id)</text>
+        <text x="10" y="86" font-size="10" fill="#64748b">Bidirectional graph</text>
+      </g>
+
+      <!-- messages -->
+      <g transform="translate(894, 45)">
+        <rect width="160" height="98" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="1"/>
+        <text x="10" y="20" font-size="12" font-weight="bold" fill="#38bdf8">messages</text>
+        <text x="10" y="38" font-size="10" fill="#94a3b8">🔑 id (PK)</text>
+        <text x="10" y="54" font-size="10" fill="#94a3b8">🔗 sender_id, receiver_id</text>
+        <text x="10" y="70" font-size="10" fill="#94a3b8">message_text</text>
+        <text x="10" y="86" font-size="10" fill="#64748b">idx_messages_pair</text>
+      </g>
+    </g>
+
+    <!-- 2. Local File System Box -->
+    <g transform="translate(1116, 60)">
+      <rect width="340" height="160" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+      <rect width="340" height="30" rx="10" fill="#b45309" fill-opacity="0.2"/>
+      <text x="14" y="20" font-size="12" font-weight="700" fill="#fcd34d">📁 Local File Storage (uploads/)</text>
+
+      <g transform="translate(14, 45)">
+        <text x="0" y="12" font-size="11" fill="#cbd5e1">• Post Media (JPEG, PNG, WebP)</text>
+        <text x="0" y="34" font-size="11" fill="#cbd5e1">• User Profile Avatars</text>
+        <text x="0" y="56" font-size="11" fill="#cbd5e1">• Disk storage filename: <tspan fill="#f59e0b">Date.now() + ext</tspan></text>
+        <text x="0" y="78" font-size="11" fill="#cbd5e1">• Statically mapped to <tspan fill="#38bdf8">/uploads/*</tspan></text>
+        <text x="0" y="100" font-size="10" fill="#94a3b8">Direct browser CDN/static streaming</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= GLOWING CONNECTOR LINES & LABELS ================= -->
+  <!-- Client to Server REST Requests -->
+  <g>
+    <!-- Arrow 1: Client to Server -->
+    <path d="M 450 340 L 450 395" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+    <rect x="330" y="352" width="240" height="24" rx="6" fill="#0f172a" stroke="#0284c7" stroke-width="1"/>
+    <text x="450" y="368" font-size="10" font-weight="600" fill="#38bdf8" text-anchor="middle">HTTP REST (JSON) + Bearer JWT</text>
+
+    <!-- Arrow 2: Client to Multer File Upload -->
+    <path d="M 800 340 L 800 395" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+    <rect x="710" y="352" width="180" height="24" rx="6" fill="#0f172a" stroke="#16a34a" stroke-width="1"/>
+    <text x="800" y="368" font-size="10" font-weight="600" fill="#4ade80" text-anchor="middle">Multipart/Form-Data</text>
+
+    <!-- Arrow 3: Static Asset Serving -->
+    <path d="M 1150 395 L 1150 345" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+    <rect x="1055" y="352" width="190" height="24" rx="6" fill="#0f172a" stroke="#d97706" stroke-width="1"/>
+    <text x="1150" y="368" font-size="10" font-weight="600" fill="#fcd34d" text-anchor="middle">Static Media Stream (/uploads)</text>
+  </g>
+
+  <!-- Server to Database & Storage -->
+  <g>
+    <!-- Arrow 4: Express to PG Pool -->
+    <path d="M 550 640 L 550 695" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="420" y="652" width="260" height="24" rx="6" fill="#0f172a" stroke="#2563eb" stroke-width="1"/>
+    <text x="550" y="668" font-size="10" font-weight="600" fill="#93c5fd" text-anchor="middle">pg.Pool Connection (SQL Queries &amp; Tx)</text>
+
+    <!-- Arrow 5: Multer to Disk -->
+    <path d="M 1250 640 L 1250 695" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrowPurple)"/>
+    <rect x="1170" y="652" width="160" height="24" rx="6" fill="#0f172a" stroke="#d97706" stroke-width="1"/>
+    <text x="1250" y="668" font-size="10" font-weight="600" fill="#fcd34d" text-anchor="middle">Save files to disk</text>
+  </g>
+</svg>

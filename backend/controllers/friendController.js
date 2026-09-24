@@ -4,7 +4,10 @@ const sendFriendRequest = async (req, res) => {
   const { senderId, receiverId } = req.body;
   try {
     const request = await Friend.sendFriendRequest(senderId, receiverId);
-    res.status(201).json({ message: 'Friend request sent', request });
+    res.status(201).json({ 
+      message: `Friend request sent to ${request.targetUsername || 'user'}`, 
+      request 
+    });
   } catch (error) {
     res.status(500).json({ error: error.message || "Unable to send friend request" });
   }
@@ -49,6 +52,17 @@ const listFriendRequests = async (req, res) => {
     res.status(500).json({ error: error.message || "Unable to fetch friend requests" });
   }
 };
+
+const getDiscoverUsers = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const users = await Friend.discoverUsers(userId);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message || "Unable to fetch discoverable users" });
+  }
+};
+
 const getFriendPosts = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -65,5 +79,6 @@ module.exports = {
   rejectFriendRequest,
   listFriends,
   listFriendRequests,
+  getDiscoverUsers,
   getFriendPosts
-};
+};

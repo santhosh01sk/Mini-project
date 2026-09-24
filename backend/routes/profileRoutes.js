@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+router.get("/:userId", profileController.getProfile);
 router.put("/update", upload.single("profileImage"), profileController.updateProfile);
 
 module.exports = router;

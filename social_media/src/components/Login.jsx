@@ -22,6 +22,13 @@ function Login() {
       if (email === adminEmail && password === adminPassword) {
         const response = await loginAdmin(email, password);
         if (response.message === 'Admin login successful') {
+          if (response.token) {
+            localStorage.setItem('token', response.token);
+          }
+          localStorage.setItem('isAdmin', 'true');
+          if (response.user) {
+            localStorage.setItem('user', JSON.stringify(response.user));
+          }
           navigate('/admin');
         }
         return;
@@ -29,6 +36,7 @@ function Login() {
 
       const result = await loginUser(email, password);
       localStorage.setItem('token', result.token);
+      localStorage.removeItem('isAdmin');
       navigate('/home');
     } catch (loginError) {
       setError('Invalid email or password. Please try again.');
@@ -83,7 +91,18 @@ function Login() {
                 <input type="checkbox" />
                 <span>Remember me</span>
               </label>
-              <span className="auth-hint">Admin: admin@gmail.com / Admin123</span>
+              <button 
+                type="button" 
+                className="auth-hint" 
+                style={{ background: 'rgba(56, 189, 248, 0.15)', border: '1px solid rgba(56, 189, 248, 0.3)', borderRadius: '6px', padding: '4px 8px', color: '#38bdf8', cursor: 'pointer' }}
+                onClick={() => {
+                  setEmail('admin@gmail.com');
+                  setPassword('Admin123');
+                }}
+                title="Click to fill admin credentials"
+              >
+                Admin Demo: admin@gmail.com / Admin123
+              </button>
             </div>
 
             {error && <div className="auth-error">{error}</div>}

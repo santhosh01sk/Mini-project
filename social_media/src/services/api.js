@@ -94,6 +94,16 @@ export const loginAdmin = async (email, password) => {
     throw error;
   }
 };
+export const getProfile = async (userId) => {
+  try {
+    const response = await api.get(`/api/profile/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch profile");
+    throw error;
+  }
+};
+
 export const updateProfile = async (formData) => {
   try {
     const response = await api.put(`/api/profile/update`, formData, {
@@ -154,6 +164,16 @@ export const getFriends = async (userId) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching friends:', error);
+    throw error;
+  }
+};
+
+export const getDiscoverUsers = async (userId) => {
+  try {
+    const response = await api.get(`/api/friends/discover/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching discoverable users:', error);
     throw error;
   }
 };
@@ -236,3 +256,34 @@ export const deletePost = async (postId) => {
     throw error;
   }
 };
+
+export const getAdminOverview = async () => {
+  try {
+    const response = await api.get('/api/admin/users-overview');
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch admin overview:", error);
+    throw error;
+  }
+};
+
+export const getAdminLogs = async () => {
+  try {
+    const response = await api.get('/api/admin/logs');
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch admin logs:", error);
+    throw error;
+  }
+};
+
+export const executeAdminQuery = async (query) => {
+  try {
+    const response = await api.post('/api/admin/query', { query });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to execute admin query:", error);
+    throw error;
+  }
+};
+

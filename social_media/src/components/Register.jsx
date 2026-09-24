@@ -5,6 +5,7 @@ import './Register.css';
 
 function Register() {
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -15,6 +16,11 @@ function Register() {
     e.preventDefault();
     setError('');
 
+    if (!username.trim()) {
+      setError('Please choose a username or enter your name.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
@@ -23,11 +29,11 @@ function Register() {
     setIsSubmitting(true);
 
     try {
-      await registerUser({ email, password });
+      await registerUser({ username: username.trim(), email: email.trim(), password });
       navigate('/login');
     } catch (registerError) {
       console.error('Error registering user:', registerError);
-      setError('Error registering user. Please try again.');
+      setError(registerError.response?.data?.error || 'Error registering user. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -52,6 +58,19 @@ function Register() {
             </div>
 
             <label className="field-group">
+              <span>Username / Full Name</span>
+              <input
+                id="username"
+                type="text"
+                placeholder="e.g. alex_doe"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                autoComplete="username"
+                required
+              />
+            </label>
+
+            <label className="field-group">
               <span>Email address</span>
               <input
                 id="email"
@@ -60,6 +79,7 @@ function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
+                required
               />
             </label>
 

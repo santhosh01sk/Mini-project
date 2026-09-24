@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { jwtDecode } from 'jwt-decode';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getFriendPosts } from "../services/api";
 import Post from "./Post";
 import Comment from './Comment';
@@ -24,6 +24,7 @@ const getUserIdFromToken = () => {
 };
 
 function Home(){
+  const navigate = useNavigate();
   const userId = getUserIdFromToken();
   const [posts, setPosts] = useState([]);
 
@@ -42,17 +43,22 @@ function Home(){
   useEffect(() => {
     fetchPosts();
   }, []);
+  const logout = () => {
+    localStorage.removeItem('token');
+    navigate('/login', { replace: true });
+  };
 
     return(
       <div className="home-shell">
         <Navbar/>
 
         <div className="dashboard-hero">
-          <div>
+          <div className="hero-copy-block">
             <p className="eyebrow">Your feed</p>
             <h1>See what your friends are sharing.</h1>
             <p className="hero-copy">A cleaner dashboard for posts, likes, comments, and conversations.</p>
           </div>
+          <button onClick={logout} className="refresh-button-logout">Logout</button>
           <div className="hero-metrics">
             <div className="metric-card">
               <span>Posts</span>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   getFriends,
   getPendingRequests,
+  getDiscoverUsers,
   sendFriendRequest,
   acceptFriendRequest,
   rejectFriendRequest,
@@ -16,6 +17,7 @@ const Friend = () => {
   const [receiverInput, setReceiverInput] = useState('');
   const [friends, setFriends] = useState([]);
   const [pendingRequests, setPendingRequests] = useState([]);
+  const [discoverUsers, setDiscoverUsers] = useState([]);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState('');
@@ -58,20 +60,34 @@ const Friend = () => {
     }
   };
 
-  const handleSendFriendRequest = async () => {
+  const fetchDiscoverUsers = async () => {
     const userId = getUserIdFromToken();
     if (!userId) return;
 
     try {
-      if (!receiverInput.trim()) {
-        setStatusMessage('Enter a username or user ID first.');
-        return;
-      }
+      const users = await getDiscoverUsers(userId);
+      setDiscoverUsers(users);
+    } catch (error) {
+      console.error('Error fetching discoverable users:', error);
+    }
+  };
 
-      await sendFriendRequest(userId, receiverInput.trim());
+  const handleSendFriendRequest = async (targetIdentifier) => {
+    const userId = getUserIdFromToken();
+    if (!userId) return;
+
+    const identifier = targetIdentifier || receiverInput.trim();
+    if (!identifier) {
+      setStatusMessage('Enter a username or user ID first.');
+      return;
+    }
+
+    try {
+      const res = await sendFriendRequest(userId, identifier);
       setReceiverInput('');
-      setStatusMessage('Friend request sent.');
+      setStatusMessage(res.message || `Friend request sent to ${identifier}!`);
       fetchPendingRequests();
+      fetchDiscoverUsers();
     } catch (error) {
       console.error('Error sending friend request:', error);
       setStatusMessage(error.response?.data?.error || error.message || 'Unable to send friend request.');
@@ -84,6 +100,7 @@ const Friend = () => {
       setStatusMessage('Friend request accepted.');
       fetchPendingRequests();
       fetchFriends();
+      fetchDiscoverUsers();
     } catch (error) {
       console.error('Error accepting friend request:', error);
       setStatusMessage(error.response?.data?.error || error.message || 'Unable to accept request.');
@@ -95,6 +112,7 @@ const Friend = () => {
       await rejectFriendRequest(requestId);
       setStatusMessage('Friend request rejected.');
       fetchPendingRequests();
+      fetchDiscoverUsers();
     } catch (error) {
       console.error('Error rejecting friend request:', error);
       setStatusMessage(error.response?.data?.error || error.message || 'Unable to reject request.');
@@ -133,9 +151,14 @@ const Friend = () => {
     setMessages([]);
   };
 
-  useEffect(() => {
+  const refreshAll = () => {
     fetchPendingRequests();
     fetchFriends();
+    fetchDiscoverUsers();
+  };
+
+  useEffect(() => {
+    refreshAll();
   }, []);
 
   useEffect(() => {
@@ -150,37 +173,63 @@ const Friend = () => {
         <div>
           <p className="eyebrow">Connections</p>
           <h1>Friends and messages in one place</h1>
-          <p className="hero-copy">Send requests by username or user ID, review incoming requests, and chat with accepted friends.</p>
+          <p className="hero-copy">Send requests by username, discover people to connect with, and chat with your friends.</p>
         </div>
-        <button className="ghost-button" onClick={fetchFriends}>Refresh</button>
+        <button className="ghost-button" onClick={refreshAll}>Refresh</button>
       </div>
 
       {statusMessage && <div className="status-banner">{statusMessage}</div>}
 
       <div className="friend-grid">
+        {/* PANEL 1: SEND FRIEND REQUEST & DISCOVER */}
         <section className="panel panel-accent">
           <h2>Send friend request</h2>
           <div className="send-request">
             <input
               type="text"
-              placeholder="Enter username or user ID"
+              placeholder="Enter username (e.g. alex)"
               value={receiverInput}
               onChange={(e) => setReceiverInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendFriendRequest()}
             />
-            <button onClick={handleSendFriendRequest}>Send Request</button>
+            <button onClick={() => handleSendFriendRequest()}>Send</button>
           </div>
-          <p className="hint-text">If usernames are missing, use the numeric user ID.</p>
+
+          <div className="discover-section">
+            <p className="sub-heading">Suggested people to connect with:</p>
+            {discoverUsers.length === 0 ? (
+              <p className="hint-text">No new users to add right now.</p>
+            ) : (
+              <ul className="discover-list">
+                {discoverUsers.map((user) => (
+                  <li key={user.user_id} className="discover-item">
+                    <div className="discover-info">
+                      <strong>{user.username}</strong>
+                      <span>{user.email}</span>
+                    </div>
+                    <button
+                      className="connect-button"
+                      onClick={() => handleSendFriendRequest(user.username)}
+                    >
+                      Connect
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </section>
 
+        {/* PANEL 2: PENDING REQUESTS */}
         <section className="panel">
-          <h2>Pending requests</h2>
+          <h2>Pending requests ({pendingRequests.length})</h2>
           <ul className="pending-requests">
             {pendingRequests.length === 0 && <li className="empty-state">No pending requests.</li>}
             {pendingRequests.map((request) => (
               <li key={request.id} className="request-item">
-                <div>
-                  <strong>{request.sender}</strong>
-                  <span>Request #{request.id}</span>
+                <div className="request-info">
+                  <strong className="username-badge">{request.sender}</strong>
+                  <span>{request.sender_email || `User #${request.sender_id}`} wants to connect</span>
                 </div>
                 <div className="request-actions">
                   <button onClick={() => handleAcceptFriendRequest(request.id)} className="accept-button">Accept</button>
@@ -191,8 +240,9 @@ const Friend = () => {
           </ul>
         </section>
 
+        {/* PANEL 3: FRIENDS LIST */}
         <section className="panel">
-          <h2>Friends</h2>
+          <h2>Friends ({friends.length})</h2>
           <ul className="friends-list">
             {friends.length === 0 && <li className="empty-state">No friends yet.</li>}
             {friends.map((friend) => (
@@ -201,9 +251,9 @@ const Friend = () => {
                 className={`friend-item ${selectedFriend?.user_id === friend.user_id ? 'active' : ''}`}
                 onClick={() => setSelectedFriend(friend)}
               >
-                <div>
-                  <strong>{friend.username || `User ${friend.user_id}`}</strong>
-                  <span>ID {friend.user_id}</span>
+                <div className="friend-info">
+                  <strong className="username-badge">{friend.username}</strong>
+                  <span>{friend.email || `ID: ${friend.user_id}`}</span>
                 </div>
               </li>
             ))}
@@ -211,6 +261,7 @@ const Friend = () => {
         </section>
       </div>
 
+      {/* CHAT CONTAINER */}
       {selectedFriend && (
         <div className="chat-container">
           <div className="chat-header">
@@ -222,24 +273,29 @@ const Friend = () => {
           </div>
 
           <div className="messages">
-            {messages.length === 0 && <div className="empty-state">No messages yet.</div>}
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`message ${message.sender_id === getUserIdFromToken() ? 'sent' : 'received'}`}
-              >
-                <p>{message.message_text}</p>
-                <span>{new Date(message.created_at).toLocaleTimeString()}</span>
-              </div>
-            ))}
+            {messages.length === 0 && <div className="empty-state">No messages yet. Say hello to {selectedFriend.username}!</div>}
+            {messages.map((message) => {
+              const isMe = message.sender_id === getUserIdFromToken();
+              return (
+                <div
+                  key={message.id}
+                  className={`message ${isMe ? 'sent' : 'received'}`}
+                >
+                  <span className="message-sender">{isMe ? 'You' : (message.sender_name || selectedFriend.username)}</span>
+                  <p>{message.message_text}</p>
+                  <span className="message-time">{new Date(message.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="send-message">
             <input
               type="text"
-              placeholder="Type a message"
+              placeholder={`Message ${selectedFriend.username}...`}
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
             />
             <button onClick={handleSendMessage}>Send</button>
           </div>
@@ -250,3 +306,4 @@ const Friend = () => {
 };
 
 export default Friend;
+

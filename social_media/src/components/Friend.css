@@ -169,6 +169,88 @@
   cursor: pointer;
 }
 
+.sub-heading {
+  margin: 18px 0 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #93c5fd;
+}
+
+.discover-section {
+  margin-top: 14px;
+}
+
+.discover-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.discover-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(2, 6, 23, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.discover-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.discover-info strong {
+  color: #38bdf8;
+  font-size: 0.95rem;
+}
+
+.discover-info span {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.connect-button {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.connect-button:hover {
+  background: rgba(56, 189, 248, 0.35);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.username-badge {
+  display: block;
+  color: #38bdf8;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
 .friend-item.active {
   border-color: rgba(96, 165, 250, 0.55);
   background: rgba(37, 99, 235, 0.18);
@@ -220,6 +302,30 @@
 .message span {
   font-size: 12px;
   color: rgba(226, 232, 240, 0.75);
+}
+
+.message-sender {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #93c5fd;
+  margin-bottom: 4px;
+}
+
+.message.sent .message-sender {
+  color: rgba(255, 255, 255, 0.95);
+  text-align: right;
+}
+
+.message-time {
+  display: block;
+  font-size: 10px;
+  color: rgba(226, 232, 240, 0.65);
+  margin-top: 4px;
+}
+
+.message.sent .message-time {
+  text-align: right;
 }
 
 .empty-state {

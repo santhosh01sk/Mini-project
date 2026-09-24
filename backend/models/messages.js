@@ -39,11 +39,22 @@ const insertMessage = async (senderId, receiverId, messageText) => {
     'INSERT INTO messages (sender_id, receiver_id, message_text, created_at) VALUES ($1, $2, $3, NOW()) RETURNING *',
     [senderId, receiverId, messageText]
   );
-  return result.rows[0];
+  const msg = result.rows[0];
+  const user = await pool.query(
+    "SELECT COALESCE(username, 'User ' || user_id) AS username FROM users WHERE user_id = $1",
+    [senderId]
+  );
+  msg.sender_name = user.rows[0]?.username || `User ${senderId}`;
+  return msg;
 };
+
 const selectMessages = async (userId, friendId) => {
   const result = await pool.query(
-    `SELECT * FROM messages WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) ORDER BY created_at ASC`,
+    `SELECT messages.*, COALESCE(users.username, 'User ' || messages.sender_id) AS sender_name 
+     FROM messages 
+     JOIN users ON messages.sender_id = users.user_id 
+     WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) 
+     ORDER BY created_at ASC`,
     [userId, friendId]
   );
   return result.rows;

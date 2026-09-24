@@ -20,6 +20,15 @@ const Sidebar = () => {
             <button onClick={handleHome} className="sidebar-link">Home</button>
             <button onClick={handleProfile} className="sidebar-link">Profile</button>
             <button onClick={handleFriend} className="sidebar-link">Friends</button>
+            {localStorage.getItem('isAdmin') === 'true' && (
+              <button 
+                onClick={(e) => { e.preventDefault(); navigate('/admin'); }} 
+                className="sidebar-link"
+                style={{ borderColor: 'rgba(99, 102, 241, 0.4)', color: '#818cf8' }}
+              >
+                ⚡ Admin Portal
+              </button>
+            )}
             <div className="sidebar-note">
               Connect, post, and chat from one place.
             </div>
